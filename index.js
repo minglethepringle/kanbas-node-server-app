@@ -4,6 +4,7 @@ import Lab5 from "./Lab5/index.js";
 import cors from "cors";
 import UserRoutes from './Kanbas/Users/routes.js';
 import CourseRoutes from "./Kanbas/Courses/routes.js";
+import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import "dotenv/config";
 import session from 'express-session';
 const app = express();
@@ -30,4 +31,5 @@ Lab5(app);
 Hello(app);
 UserRoutes(app);
 CourseRoutes(app);
+ModuleRoutes(app);
 app.listen(process.env.PORT || 4000)
