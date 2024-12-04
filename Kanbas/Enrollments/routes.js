@@ -3,7 +3,7 @@ export default function EnrollmentRoutes(app) {
     // get all enrollments for user
     app.get("/api/enrollments/:userId", async (req, res) => {
         const { userId } = req.params;
-        const enrollments = await enrollmentsDao.getEnrollmentsForUser(userId);
+        const enrollments = await enrollmentsDao.findCoursesForUser(userId);
         res.send(enrollments);
     });
 
@@ -12,11 +12,5 @@ export default function EnrollmentRoutes(app) {
         const { user, course } = req.body;
         const newEnrollment = await enrollmentsDao.enrollUserInCourse(user, course);
         res.send(newEnrollment);
-    });
-
-    app.delete("/api/enrollments/:enrollmentId", async (req, res) => {
-        const { enrollmentId } = req.params;
-        const status = await enrollmentsDao.deleteEnrollment(enrollmentId);
-        res.send(status);
     });
 }
