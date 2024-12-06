@@ -9,13 +9,13 @@ const quizSchema = new mongoose.Schema(
             quizType: {
                 type: String,
                 enum: ['GradedQuiz', 'PracticeQuiz', 'GradedSurvey', 'UngradedSurvey'],
-                required: true,
+                required: false,
             },
             points: Number,
             assignmentGroup: {
                 type: String,
                 enum: ['Quizzes', 'Exams', 'Assignments', 'Project'],
-                required: true,
+                required: false,
             },
             shuffleAnswers: Boolean,
             timeLimit: Number,
@@ -32,7 +32,7 @@ const quizSchema = new mongoose.Schema(
         },
         questions: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Question', // Refers to the 'Question' model
+            ref: 'QuestionModel', // Refers to the 'Question' model
         }]
     },
     { collection: "quizzes" }
