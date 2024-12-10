@@ -1,4 +1,4 @@
-import * as questionDao from "./questionDao.js";
+import * as questionDao from "./dao.js";
 
 export default function QuestionRoutes(app) {
     app.post("/api/quizzes/:quizId/questions", async (req, res) => {

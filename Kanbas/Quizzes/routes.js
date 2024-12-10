@@ -11,5 +11,4 @@ export default function QuizRoutes(app) {
         const status = await quizzesDao.updateQuiz(quizId, quizUpdates);
         res.send(status);
     });
-
 }
