@@ -32,7 +32,7 @@ const quizSchema = new mongoose.Schema(
         },
         questions: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'QuestionModel', // Refers to the 'Question' model
+            ref: 'QuestionModel',
         }]
     },
     { collection: "quizzes" }
