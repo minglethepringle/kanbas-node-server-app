@@ -20,10 +20,6 @@ export function updateQuiz(quizId, quizUpdates) {
     return model.updateOne({ _id: quizId }, { $set: quizUpdates });
 }
 
-export function findQuestionsForQuiz(quizId, quizUpdates) {
-    return model.updateOne({ _id: quizId }, { $set: quizUpdates });
-}
-
 export function publishQuiz(quizId) {
     return model.updateOne({ _id: quizId }, { $set: { "details.published": true } });
 }

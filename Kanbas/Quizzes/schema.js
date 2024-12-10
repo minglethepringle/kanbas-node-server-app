@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-// TODO: MAY NEED TO EDIT THIS 
 const quizSchema = new mongoose.Schema(
     {
         course: { type: mongoose.Schema.Types.ObjectId, ref: "CourseModel" },
@@ -30,10 +29,6 @@ const quizSchema = new mongoose.Schema(
             untilDate: Date,
             published: Boolean,
         },
-        questions: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'QuestionModel',
-        }]
     },
     { collection: "quizzes" }
 );

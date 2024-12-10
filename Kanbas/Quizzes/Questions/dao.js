@@ -1,6 +1,10 @@
 import model from "./model.js";
 export function findQuestionsForQuiz(quizId) {
-    return model.find({ quiz: quizId });
+    return model.find({ qid: quizId });
+}
+
+export function findQuestionById(questionId) {
+    return model.findById(questionId);
 }
 
 export function createQuestion(question) {
