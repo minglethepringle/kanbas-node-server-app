@@ -1,4 +1,8 @@
 import model from "./model.js";
+export function findQuizById(quizId) {
+    return model.findById(quizId);
+}
+
 export function findQuizzesForCourse(courseId) {
     return model.find({course: courseId});
 }
@@ -18,5 +22,9 @@ export function updateQuiz(quizId, quizUpdates) {
 
 export function findQuestionsForQuiz(quizId, quizUpdates) {
     return model.updateOne({ _id: quizId }, { $set: quizUpdates });
+}
+
+export function publishQuiz(quizId) {
+    return model.updateOne({ _id: quizId }, { $set: { "details.published": true } });
 }
 
