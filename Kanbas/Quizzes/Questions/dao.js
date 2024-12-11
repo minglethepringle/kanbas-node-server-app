@@ -12,10 +12,10 @@ export function createQuestion(question) {
     return model.create(question);
 }
 
-export function deleteQuestion(questionId) {
-    return model.deleteOne({ _id: questionId });
+export function deleteQuestionsForQuiz(quizId) {
+    return model.deleteMany({ qid: quizId });
 }
 
-export function updateQuestion(questionId, questionUpdates) {
-    return model.updateOne({ _id: questionId }, { $set: questionUpdates });
+export function saveQuestions(questions) {
+    return model.insertMany(questions);
 }

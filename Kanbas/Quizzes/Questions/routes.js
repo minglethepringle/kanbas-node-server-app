@@ -1,14 +1,14 @@
 import * as questionDao from "./dao.js";
 
 export default function QuestionRoutes(app) {
-    // app.post("/api/quizzes/:quizId/questions", async (req, res) => {
-    //     const { quizId } = req.params;
-    //     const questionData = req.body;
-    //     questionData.quiz = quizId;
+    app.post("/api/quizzes/:quizId/questions", async (req, res) => {
+        const { quizId } = req.params;
+        const questionData = req.body;
+        questionData.quiz = quizId;
 
-    //     const newQuestion = await questionDao.createQuestion(questionData);
-    //     res.status(201).json(newQuestion);
-    // });
+        const newQuestion = await questionDao.createQuestion(questionData);
+        res.status(201).json(newQuestion);
+    });
 
     app.get("/api/quizzes/:quizId/questions", async (req, res) => {
         const { quizId } = req.params;
