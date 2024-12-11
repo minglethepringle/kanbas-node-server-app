@@ -59,17 +59,19 @@ export default function AttemptsRoutes(app) {
 
         // create a dictionary of question id to the right answers
         // { questionId: { ...question, correctAnswers: string[] } }
-        const questions = await questionsDao.findQuestionsForQuiz(quizId)
-        const questionMap = await questions.reduce(async (map, question) => {
+        const questions = await questionsDao.findQuestionsForQuiz(quizId);
+        let questionMap = {};
+
+        questions.forEach(q => {
+            const question = q.toJSON();
             const correctAnswers = question.properties.choices.filter(choice => choice.isCorrect).map(choice => choice.text);
-            return {
-                ...map,
-                [question._id]: {
-                    ...question,
-                    correctAnswers,
-                }
-            };
-        }, {});
+            questionMap[question._id] = {
+                ...question,
+                correctAnswers
+            }
+        });
+
+        // console.log(questionMap);
 
         // Grade each answer
         let score = 0;
@@ -93,14 +95,18 @@ export default function AttemptsRoutes(app) {
         });
 
         // Save attempt
-        const savedAttempt = await attemptsDao.createAttempt({
+        const savedAttempt = {
             datetime: new Date().toISOString(),
             quizId,
             userId: attempt.userId,
             score,
             answers: gradedAnswers,
-        });
-        attemptsDao.createAttempt(savedAttempt);
+        };
+
+        // console.log("##### ATTEMPT SAVING: ");
+        // console.log(savedAttempt);
+
+        await attemptsDao.createAttempt(savedAttempt);
         
         res.send(200);
     });

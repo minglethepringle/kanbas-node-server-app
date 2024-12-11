@@ -10,7 +10,7 @@ const attemptsSchema = new mongoose.Schema(
             {
                 questionId: { type: mongoose.Schema.Types.ObjectId, ref: "QuestionModel" },
                 studentAnswer: String,
-                correctAnswer: String,
+                correctAnswers: [String],
             },
         ],
     },
