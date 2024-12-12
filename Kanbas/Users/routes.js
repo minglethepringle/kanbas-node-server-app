@@ -50,6 +50,7 @@ export default function UserRoutes(app) {
 
     const deleteUser = async (req, res) => {
         const status = await dao.deleteUser(req.params.userId);
+        await enrollmentsDao.removeEnrollmentsForUser(req.params.userId);
         res.json(status);
     };
 
