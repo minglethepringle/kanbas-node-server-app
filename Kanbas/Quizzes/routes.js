@@ -58,4 +58,16 @@ export default function QuizRoutes(app) {
             questions,
         });
     });
+
+    app.put("/api/quizzes/:quizId/unpublish", async (req, res) => {
+        const { quizId } = req.params;
+        await quizzesDao.unpublishQuiz(quizId);
+        const updatedQuiz = await quizzesDao.findQuizById(quizId);
+        // For each quiz, find questions
+        const questions = await questionsDao.findQuestionsForQuiz(quizId);
+        res.json({
+            ...updatedQuiz.toJSON(),
+            questions,
+        });
+    });
 }

@@ -24,3 +24,6 @@ export function publishQuiz(quizId) {
     return model.updateOne({ _id: quizId }, { $set: { "details.published": true } });
 }
 
+export function unpublishQuiz(quizId) {
+    return model.updateOne({ _id: quizId }, { $set: { "details.published": false } });
+}
