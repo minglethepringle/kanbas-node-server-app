@@ -23,7 +23,11 @@ export default function AttemptsRoutes(app) {
         questions.forEach(q => {
             questionsMap[q._id] = q;
         });
+        console.log("##### QUESTIONS MAP: ");
+        console.log(questionsMap);
         latestAttempt = latestAttempt.toJSON();
+        console.log("##### LATEST ATTEMPT: ");
+        console.log(latestAttempt);
         latestAttempt.answers = latestAttempt.answers.map(answer => {
             return {
                 ...answer,
