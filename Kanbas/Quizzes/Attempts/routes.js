@@ -13,7 +13,24 @@ export default function AttemptsRoutes(app) {
     // Get latest attempt for a quiz and user
     app.get("/api/quizzes/:quizId/attempts/:userId/latest", async (req, res) => {
         const { quizId, userId } = req.params;
-        const latestAttempt = await attemptsDao.findLatestAttemptForQuizAndUser(quizId, userId);
+        let latestAttempt = await attemptsDao.findLatestAttemptForQuizAndUser(quizId, userId);
+        if (!latestAttempt) {
+            res.json(null);
+            return;
+        }
+        let questionsMap = {};
+        let questions = await questionsDao.findQuestionsForQuiz(quizId);
+        questions.forEach(q => {
+            questionsMap[q._id] = q;
+        });
+        latestAttempt = latestAttempt.toJSON();
+        latestAttempt.answers = latestAttempt.answers.map(answer => {
+            return {
+                ...answer,
+                question: questionsMap[answer.questionId],
+            };
+        });
+    
         res.json(latestAttempt);
     });
 
